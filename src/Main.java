@@ -34,20 +34,22 @@ public class Main extends PApplet {
 		System.out.println("What map would you like to play on 1,2,3,4");
 		Scanner scan = new Scanner(System.in);
 		backgroundNum = scan.nextInt();
-		// is Goal, is Blue, x, y
-		//doing blue team
-		addBlock(true,true, 4,7);
-		addBlock(false,true, 2,7);
-		addBlock(false,true, 3,7);
-		addBlock(false,true, 5,7);
-		addBlock(false,true, 6,7);
-		//doing red team
-		addBlock(true,false, 4,1);
-		addBlock(false,false, 2,1);
-		addBlock(false,false, 3,1);
-		addBlock(false,false, 5,1);
-		addBlock(false,false, 6,1);
-	
+		// is Goal, isBlue(int), x, y, blockType
+		// isBlue 1 = blue 2 = Red 0 = no team
+		// blockType 0 = normal Block 1 = rock
+		// doing blue team
+		addBlock(true, 1, 4, 2, 0);
+		
+		addBlock(false, 1, 2, 1, 0);
+		addBlock(false, 1, 3, 1, 0);
+		addBlock(false, 1, 7, 1, 0);
+		// doing red team
+		addBlock(true, 2, 4, 6, 0);
+
+		addBlock(false, 2, 2, 7, 0);
+		addBlock(false, 2, 3, 7, 0);
+		addBlock(false, 2, 7, 7, 0);
+
 	}
 
 	public void draw() {
@@ -94,26 +96,26 @@ public class Main extends PApplet {
 		image(background, 0, 0, sizeX, sizeY);
 	}
 
-	void addBlock(boolean isGoal, boolean isBlue, int x, int y) {// so the Block gets put into the arrayList
+	void addBlock(boolean isGoal, int isBlue, int x, int y, int blockType) {// so the Block gets put into the arrayList
 		if (isGoal) {
-			Goals.add(new Block(isGoal, isBlue, x, y));
+			Goals.add(new Block(isGoal, isBlue, x, y, blockType));
 		}
-		Blocks.add(new Block(isGoal, isBlue, x, y));
+		Blocks.add(new Block(isGoal, isBlue, x, y, blockType));
 	}
 
 	void drawBlocks() {
 		while (counter != Blocks.size()) {
 			double tempX = Blocks.get(counter).getX(); // temporary x and y for the block to draw it
 			double tempY = Blocks.get(counter).getY();
-			boolean tempIsBlue = Blocks.get(counter).getIsBlue();
+			int tempIsBlue = Blocks.get(counter).getIsBlue();
 			boolean tempIsGoal = Blocks.get(counter).getIsGoal();
-			if (tempIsBlue && tempIsGoal) {
+			if (tempIsBlue == 1 && tempIsGoal) {
 				draw = loadImage("sprites/blueGoal.png"); // blue's goal
-			} else if (tempIsBlue) {
+			} else if (tempIsBlue == 1) {
 				draw = loadImage("sprites/blueBlock.png");
-			} else if (!tempIsBlue && tempIsGoal) {
+			} else if (!(tempIsBlue == 1) && tempIsGoal) {
 				draw = loadImage("sprites/redGoal.png");
-			} else if (!tempIsBlue) {
+			} else if (!(tempIsBlue == 1)) {
 				draw = loadImage("sprites/redBlock.png");
 			}
 			image(draw, (int) ((tempX - 1) * lineSpaceingX), (int) ((tempY - 1) * lineSpaceingY), lineSpaceingX,
@@ -134,7 +136,7 @@ public class Main extends PApplet {
 			highlight = Blocks.get(counter);
 			if (((highlight.getX() - 1) * lineSpaceingX < mouseX) && (highlight.getX() * lineSpaceingX > mouseX)) {
 				if (((highlight.getY() - 1) * lineSpaceingY < mouseY) && (highlight.getY() * lineSpaceingY > mouseY)) {
-					if (highlight.getIsBlue() == isBlueTurn && !highlight.getIsGoal()) {
+					if ((highlight.getIsBlue() == 1) == isBlueTurn && !highlight.getIsGoal()) {
 						return highlight;
 					}
 				}
@@ -217,9 +219,9 @@ public class Main extends PApplet {
 				if (Blocks.get(counter).getX() == Goals.get(secondaryCounter).getX() // seeing is a block hit a goal
 						&& Blocks.get(counter).getY() == Goals.get(secondaryCounter).getY()) {
 					if (!Blocks.get(counter).getIsGoal()) {
-						if (Goals.get(secondaryCounter).getIsBlue()) {
+						if (Goals.get(secondaryCounter).getIsBlue() == 1) {
 							isBlueWin = false;
-						} else if (!Goals.get(secondaryCounter).getIsBlue()) {
+						} else if (!(Goals.get(secondaryCounter).getIsBlue() == 1)) {
 							isBlueWin = true;
 						}
 					}

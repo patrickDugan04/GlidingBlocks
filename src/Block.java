@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Block {
 	boolean isGoal; // to see if block is a goal
-	boolean isBlue; // to see what team the block is on
+	int isBlue; // to see what team the block is on
 	double x; // the blocks x coordinate
 	double y; // the blocks y coordinate
 	int yLineS;
@@ -16,11 +16,12 @@ public class Block {
 	int counter;
 	boolean moveing = false;
 	int win = 0;
-	int extraBlockTypes;
+	int blockTypes;
 
-	Block(boolean isGoalTemp, boolean isBlueTemp, int xTemp, int yTemp) {
+	Block(boolean isGoalTemp, int i, int xTemp, int yTemp, int blockType) {
+		blockTypes = blockType; // 0 = normal block, 2 = rock
 		isGoal = isGoalTemp;
-		isBlue = isBlueTemp;
+		isBlue = i;
 		x = xTemp;
 		y = yTemp;
 		destX = xTemp;
@@ -65,7 +66,7 @@ public class Block {
 		return isGoal;
 	}
 
-	boolean getIsBlue() {
+	int getIsBlue() {
 		return isBlue;
 	}
 
