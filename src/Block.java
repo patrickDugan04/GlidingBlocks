@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Block {
 	boolean isGoal; // to see if block is a goal
-	int isBlue; // to see what team the block is on
+	int team; // to see what team the block is on
 	double x; // the blocks x coordinate
 	double y; // the blocks y coordinate
 	int yLineS;
@@ -17,17 +17,18 @@ public class Block {
 	boolean moveing = false;
 	int win = 0;
 	int blockTypes;
+	boolean dead;
 
 	Block(boolean isGoalTemp, int i, int xTemp, int yTemp, int blockType) {
 		blockTypes = blockType; // 0 = normal block, 2 = rock
 		isGoal = isGoalTemp;
-		isBlue = i;
+		team = i;
 		x = xTemp;
 		y = yTemp;
 		destX = xTemp;
 		destY = yTemp;
-		System.out.println(x);
-		System.out.println(y);
+		//System.out.println(x);
+		//System.out.println(y);
 	}
 
 	double getX() {
@@ -66,8 +67,8 @@ public class Block {
 		return isGoal;
 	}
 
-	int getIsBlue() {
-		return isBlue;
+	int getTeam() {
+		return team;
 	}
 
 	double getDestX() {
@@ -94,11 +95,11 @@ public class Block {
 		destY = y;
 		boolean done = true;
 		while (done) {
-			System.out.println("loop1");
+		//	System.out.println("loop1");
 			if (isOverlap(Blocks)) {
 				destX = destX + incrX;
 				destY = destY + incrY;
-				System.out.println(destX + ",1 " + destY);
+			//	System.out.println(destX + ",1 " + destY);
 			} else {
 				destX = destX + (incrX * -1); // if the destination is on a block it will flip the direction and
 												// then
@@ -114,11 +115,11 @@ public class Block {
 
 	boolean isOverlap(ArrayList Blocks) { // returns false if block touches other block
 		while (counter != Blocks.size()) {
-			System.out.println("loop2");
+		//	System.out.println("loop2");
 			Block temp = (Block) Blocks.get(counter);
-			System.out.println(temp.getX() + " Block " + temp.getY() + "------------");
+		//	System.out.println(temp.getX() + " Block " + temp.getY() + "------------");
 			if ((temp.getX() == destX) && (temp.getY() == destY) && !(x == temp.getX() && y == temp.getY())) {
-				System.out.println("hit");
+				//System.out.println("hit");
 				if (!temp.getIsGoal()) {
 					hit = temp;
 					return false;
@@ -132,6 +133,15 @@ public class Block {
 		counter = 0;
 		return true;
 
+	}
+
+	void setDead(boolean b) { // kill a goal
+		dead = b;
+		
+	}
+	boolean getDead() { // kill a block
+		return dead;
+		
 	}
 
 	void getHit(int directX, int directY, ArrayList Blocks) {
