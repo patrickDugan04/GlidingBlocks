@@ -5,8 +5,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Main extends PApplet {
-	int sizeX = 600;
-	int sizeY = 600; // the x and y for the window
+	int sizeX = 570;
+	int sizeY = 570; // the x and y for the window
 	int lineSpaceingX = sizeX / 7; // How far apart the grid lines are
 	int lineSpaceingY = sizeY / 7;
 	double acceleration = .1; // how fast the blocks move
@@ -97,6 +97,7 @@ public class Main extends PApplet {
 		line(lineSpaceingX * 4, 0, lineSpaceingX * 4, sizeY);
 		line(lineSpaceingX * 5, 0, lineSpaceingX * 5, sizeY);
 		line(lineSpaceingX * 6, 0, lineSpaceingX * 6, sizeY);
+		line(lineSpaceingX * 7, 0, lineSpaceingX * 7, sizeY);
 		// drawing horizontal lines
 		line(0, lineSpaceingY, sizeX, lineSpaceingY);
 		line(0, lineSpaceingY * 2, sizeX, lineSpaceingY * 2);
@@ -104,6 +105,7 @@ public class Main extends PApplet {
 		line(0, lineSpaceingY * 4, sizeX, lineSpaceingY * 4);
 		line(0, lineSpaceingY * 5, sizeX, lineSpaceingY * 5);
 		line(0, lineSpaceingY * 6, sizeX, lineSpaceingY * 6);
+		line(0, lineSpaceingY * 7, sizeX, lineSpaceingY * 7);
 	}
 
 	void clearSpace() {
