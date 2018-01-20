@@ -61,10 +61,10 @@ public class Main extends PApplet {
 		addBlock(false, 2, 7, 7, 0);
 
 		// doing green team
-		addBlock(true, 3, 1, 1, 0);
+	//	addBlock(true, 3, 1, 1, 0);
 		
-		addBlock(false, 3, 7, 4, 0);
-		addBlock(false, 3, 6, 4, 0);
+	//	addBlock(false, 3, 7, 4, 0);
+	//	addBlock(false, 3, 6, 4, 0);
 	}
 
 	public void draw() {
